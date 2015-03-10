@@ -19,18 +19,10 @@ def before_request():
 def register():
     if request.method == 'GET':
         return render_template('register.html')
-    print("!!!!!!!!!!!!!!!!!!!")
-    print(request.form['username'])
-    print(request.form['password'])
-    print(request.form['email'])
-    print("22222222222222222222222222")
     reg_user = User()
-    print("~~~~`creat instance~~~~~")
     reg_user.username = request.form['username']
     reg_user.password = request.form['password']
     reg_user.email = request.form['email']
-    print('!!!!!!!!!!!!!!!!!!!!!!!!!')
-    print (reg_user)
     db.session.add(reg_user)
     db.session.commit()
     flash ('User successfully registered')
