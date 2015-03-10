@@ -65,12 +65,24 @@ def index():
     return render_template ("index.html")
 
 
+@app.route('/contact')
+def contact():
+    return render_template ("contact.html")
+
+
+@app.route('/about')
+def about():
+    return render_template ("about.html")
+
+
 @app.route('/programming')
-# @login_required
 def programming():
-    topics = Topic.query.all()
+    # topic = Topic.query.get(1)
+    questions = Question.query.filter_by(topic_id = 1)
+    users = User.query.all()
     return render_template ("programming.html",
-                            topics = topics)
+                            questions = questions,
+                            users = users)
     # return "Hello"
 
 @app.route('/ask_question', methods=['GET','POST'])
@@ -98,9 +110,4 @@ def add_question():
         flash ('Question successfully added')
         return redirect(url_for('index'))
 
-
-def add_new_dict_device_type (request):
-    new_dict_device_type = device_type()
-    new_dict_device_type.type = request.GET['add_dict_device_type.type']
-    new_dict_device_type.save()
-    return (redirect('/dict_device_type'))
+@app.route('programming_question/'):
