@@ -17,6 +17,12 @@
     <!-- Custom styles for this template -->
    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jumbotron-narrow.css') }}">
 
+  <style>
+       .asterisk_red {
+        color: red !important;
+       }
+   </style>
+
 
   </head>
 
@@ -24,33 +30,18 @@
 
     <div class="container">
 
-        <form class="form-inline" style="float: right;">
-            <div class="form-group">
-            <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email" value="">
-            </div>
-            <div class="form-group">
-            <label class="sr-only" for="exampleInputPassword3">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password" value="">
-            </div>
-            <div class="checkbox">
-            <label>
-              <input type="checkbox"> Remember me
-            </label>
-            </div>
-            <button type="submit" class="btn btn-default">Sign in</button>
-        </form>
 
-    <!--<div style="float: right;">login/register</div>-->
-        <br>
-        <br>
+
+    <div style="float: right;">login/register</div>
+        <!--<br>-->
+        <!--<br>-->
         <br>
         <br>
       <div class="header">
 
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation" class="active"><a href="index">Home</a></li>
             <li role="presentation"><a href="#">About</a></li>
             <li role="presentation"><a href="#">Contact</a></li>
           </ul>
