@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for topic in topics %}
+        <p>{{topic.topic_name}}</p>
+{% endfor %}
+
+132
+<!--!!!!!!!!!!MY FORM!!!!!!!!!-->
+
+         <form action="/add_new_dict_device_type" class="form-horizontal" method="GET" role="form">
+
+             <div class="panel-body">
+               <h4 class="text-primary">Please fill the form</h4>
+               <br />
+
+
+<!--Form.Device type-->
+             <div class="form-group">
+                <label class="col-sm-2 control-label"> Device type <span class="mandatory-field-asterisk asterisk_red">*</span></label>
+                <div class="col-sm-10">
+                    <div class="ddl">
+                        <div class="input-group">
+                            <input class="form-control ddl-text" name="add_dict_device_type.type" type="text" required value="" />
+                        </div>
+                    </div>
+                </div>
+             </div>
+             </div>
+
+
+<!--Form.Footer.buttons-->
+            <div class="panel-footer">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                    <a href="/dict_device_type" class="btn btn-default">Cancel</a>
+                </div>
+            </div>
+        </div>
+
+         </form>
+
+
+{% endblock %}

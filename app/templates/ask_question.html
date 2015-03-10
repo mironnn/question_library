@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!--!!!!!!!!!!MY FORM!!!!!!!!!-->
+
+         <form action="/ask_question" class="form-horizontal" method="GET" role="form">
+
+             <div class="panel-body">
+               <h4 class="text-primary">Please fill the form</h4>
+               <br />
+
+
+<!--Form.Question-->
+             <div class="form-group">
+                <label class="col-sm-2 control-label"> Question: <span class="mandatory-field-asterisk asterisk_red">*</span></label>
+                <div class="col-sm-10">
+                    <div class="ddl">
+                        <div class="input-group">
+                            <input class="form-control ddl-text" name="question_body" type="text" required value="" />
+                        </div>
+                    </div>
+                </div>
+             </div>
+             </div>
+             <!---->
+<!--&lt;!&ndash;Form.Topic &ndash;&gt;-->
+             <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">Responsible User <span class="asterisk_red mandatory-field-asterisk">*</span></label>-->
+                <!--<div class="col-sm-10">-->
+                    <!--<div class="ddl">-->
+                        <!--<div class="input-group">-->
+                            <!--<select required class="form-control ddl-text" name="new_asset.device.User">-->
+                                <!--<option disabled>Choose responsible user </option>-->
+                                <!--<option value="None">None </option>-->
+                                <!--{% for i in users_all %}-->
+                                <!--<option value="{{i.name}}">{{i.name}}</option>-->
+                                <!--{%endfor%}-->
+                             <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+             <!--</div>-->
+
+
+<!--Form.Footer.buttons-->
+            <div class="panel-footer">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                    <a href="/index" class="btn btn-default">Cancel</a>
+                </div>
+            </div>
+        </div>
+
+         </form>
+
+{% for topic in topics %}
+        <p>{{topic.topic_name}}</p>
+{% endfor %}
+
+
+{% endblock %}
