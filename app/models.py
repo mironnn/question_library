@@ -13,7 +13,7 @@ class User(db.Model):
     # role = db.Column(db.SmallInteger, default = ROLE_USER)
     questions = db.relationship('Question', backref = 'author', lazy = 'dynamic')
     answers = db.relationship('Answer', backref = 'answer', lazy = 'dynamic')
-    registered_on = db.Column('registered_on', db.DateTime)
+    registered_on = db.Column(db.DateTime)
 
     # def __init__(self, username, password, email):
     #     self.username = username

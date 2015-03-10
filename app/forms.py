@@ -7,7 +7,7 @@ from wtforms.validators import Required
 #     remember_me = BooleanField('remember_me', default = False)
 
 class QuestionForm(Form):
-    question = TextField('question', validators = [Required()])
+    question = TextField('ask_question', validators = [Required()])
 
 class AnswerForm(Form):
-    answer = TextField ('question', validators = [Required()])
+    answer = TextField ('answer', validators = [Required()])

@@ -5,10 +5,11 @@
 
 <!--!!!!!!!!!!MY FORM!!!!!!!!!-->
 
-         <form action="/ask_question" class="form-horizontal" method="GET" role="form">
+         <form name="add_question" action="/add_question" class="form-horizontal" method="POST" role="form">
+
 
              <div class="panel-body">
-               <h4 class="text-primary">Please fill the form</h4>
+               <h4 class="text-primary">Please, write your question and choose the topic:</h4>
                <br />
 
 
@@ -18,30 +19,31 @@
                 <div class="col-sm-10">
                     <div class="ddl">
                         <div class="input-group">
-                            <input class="form-control ddl-text" name="question_body" type="text" required value="" />
+                            <input style="width: 500px;" class="form-control ddl-text" name="question_body" type="text" required value="" />
+                        </div>
+                    </div>
+                </div>
+             </div>
+
+             <!---->
+<!--Form.Topic -->
+             <div class="form-group">
+                <label class="col-sm-2 control-label"> Topic: <span class="asterisk_red mandatory-field-asterisk">*</span></label>
+                <div class="col-sm-10">
+                    <div class="ddl">
+                        <div class="input-group">
+                            <select required class="form-control ddl-text" name="question_topic">
+                                <option disabled>Choose Topic</option>
+                                <!--<option value="None">None </option>-->
+                                {% for topic in topics %}
+                                    <option value="{{topic.id}}">{{topic.topic_name}}</option>
+                                {%endfor%}
+                             </select>
                         </div>
                     </div>
                 </div>
              </div>
              </div>
-             <!---->
-<!--&lt;!&ndash;Form.Topic &ndash;&gt;-->
-             <!--<div class="form-group">-->
-                <!--<label class="col-sm-2 control-label">Responsible User <span class="asterisk_red mandatory-field-asterisk">*</span></label>-->
-                <!--<div class="col-sm-10">-->
-                    <!--<div class="ddl">-->
-                        <!--<div class="input-group">-->
-                            <!--<select required class="form-control ddl-text" name="new_asset.device.User">-->
-                                <!--<option disabled>Choose responsible user </option>-->
-                                <!--<option value="None">None </option>-->
-                                <!--{% for i in users_all %}-->
-                                <!--<option value="{{i.name}}">{{i.name}}</option>-->
-                                <!--{%endfor%}-->
-                             <!--</select>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-             <!--</div>-->
 
 
 <!--Form.Footer.buttons-->
@@ -57,9 +59,9 @@
 
          </form>
 
-{% for topic in topics %}
-        <p>{{topic.topic_name}}</p>
-{% endfor %}
+<!--{% for topic in topics %}-->
+        <!--<p>{{topic.topic_name}}</p>-->
+<!--{% endfor %}-->
 
 
 {% endblock %}
