@@ -110,4 +110,4 @@ def add_question():
         flash ('Question successfully added')
         return redirect(url_for('index'))
 
-@app.route('programming_question/'):
+# @app.route('programming_question/'):
