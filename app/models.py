@@ -4,7 +4,7 @@ from datetime import datetime
 # ROLE_USER = 0
 # ROLE_ADMIN = 1
 
-class User(db.Model):
+class Users(db.Model):
     # __tablename__ = "users"
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(50), index = True, unique = True)
@@ -49,7 +49,7 @@ class Question(db.Model):
     topic_id = db.Column(db.Integer, db.ForeignKey('topic.id'))
     question_body = db.Column(db.String(150))
     timestamp = db.Column(db.DateTime)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     # answers = db.relationship('Answer', backref = 'answer', lazy = 'dynamic')
 
     def __repr__(self):
@@ -61,7 +61,7 @@ class Answer(db.Model):
     answer_timestamp = db.Column (db.DateTime)
     topic_id = db.Column(db.Integer, db.ForeignKey('topic.id'))
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     vote = db.Column (db.Integer, default = 0)
 
     def __repr__(self):
