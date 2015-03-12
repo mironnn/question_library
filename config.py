@@ -5,6 +5,10 @@ CSRF_ENABLED = True
 SECRET_KEY = '3453kjnfv2i24uhwivnweowe3n4'
 
 # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+
+# if os.environ.get('DATABASE_URL') is None:
+#   SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+
 if os.environ.get('DATABASE_URL') is None:
   SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 else:
