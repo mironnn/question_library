@@ -1,3 +1,4 @@
+<!--Q-U-E-S-T-I-O-N-S-->
 {% extends 'base.html' %}
 
 {% block content %}
@@ -7,12 +8,13 @@
 
 
          <div>
-              <form action="/answers" method="POST" name="template">
+              <form action="/answers" method="get" name="template">
                   <ul class="list-group" style="border-collapse: collapse; !important">
                       {% for question in questions %}
                         <li class="list-group-item" style="border-collapse: collapse; !important">
-                            <input name="topic_name" type="hidden" value="{{question.id}}" />
+                            <input name="question_id" type="hidden" value="{{question.id}}" />
                             <button type="submit" style="text-decoration: none;" class="btn btn-link">{{question.question_body}}</button>
+                            <span>{{question.id}}</span>
                         </li>
                       {% endfor %}
                   </ul>

@@ -1,23 +1,50 @@
+<!--A-N-S-W-E-R-S-->
 {% extends 'base.html' %}
 
 {% block content %}
 
 <div><h2>Answers for: </h2></div>
         <br>
-<span>123</span>
+<span>Question is: {{current_question.question_body}}</span>
 
-         <div>
-              <form action="/answers" method="POST" name="answers_template">
+         <div class="panel-body">
+              <form action="/votes" method="POST" name="answers_template">
                   <ul class="list-group" style="border-collapse: collapse; !important">
-                      {% for question in questions %}
+                      {% for answer in answers %}
                         <li class="list-group-item" style="border-collapse: collapse; !important">
-                            <input name="topic_name" type="hidden" value="{{question.id}}" />
-                            <button type="submit" style="text-decoration: none;" class="btn btn-link">{{question.question_body}}</button>
+                            <span>Answer is {{answer.answer_body}}</span>
+                            <input name="question_id" type="hidden" value="{{current_question.id}}" />
+                            <button type="submit" style="text-decoration: none;" class="btn btn-link">Vote</button>
                         </li>
                       {% endfor %}
                   </ul>
               </form>
           </div>
+        <div>
+            <form action="/add_answer" method="POST" name="add_answers">
+                <input name="question_id" type="hidden" value="{{current_question.id}}" />
 
+                <div class="form-group">
+                <div class="col-sm-10">
+                    <div class="ddl">
+                        <div class="input-group">
+                            <input style="width: 500px;" class="form-control ddl-text" name="answer" type="text" value=""  />
+                        </div>
+                    </div>
+                </div>
+             </div>
+
+
+
+                <div class="panel-footer">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Add answer</button>
+                            <a href="/index" class="btn btn-default">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
 
 {% endblock %}
