@@ -36,7 +36,7 @@
                                 <option disabled>Choose Topic</option>
                                 <!--<option value="None">None </option>-->
                                 {% for topic in topics %}
-                                    <option value="{{topic.id}}">{{topic.topic_name}}</option>
+                                    <option value="{{topic.id}}" required {% if topic.id == current_topic_id %} selected {% endif %}>{{topic.topic_name}}</option>
                                 {%endfor%}
                              </select>
                         </div>

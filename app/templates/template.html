@@ -5,6 +5,10 @@
 
 <div><h2>{{current_topic}} questions: </h2></div>
         <br>
+        <form action="/ask_question" method="GET">
+            <input name="current_topic_id" type="hidden" value="{{current_topic_id}}" />
+            <button type="submit" style="text-decoration: none;" class="btn btn-md btn-success">Ask question!</button>
+        </form>
 
          <div class="row marketing">
              <table class="table table-bordered">

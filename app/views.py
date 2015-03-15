@@ -92,7 +92,8 @@ def programming():
                                    current_topic = current_topic,
                                    questions=questions,
                                    users=users,
-                                   topics = topics)
+                                   topics = topics,
+                                   current_topic_id=current_topic_id)
     else:
         return "Something going wrong"
 
@@ -111,7 +112,8 @@ def hardware():
                                    current_topic = current_topic,
                                    questions=questions,
                                    users=users,
-                                   topics = topics)
+                                   topics = topics,
+                                   current_topic_id=current_topic_id)
     else:
         return "Something going wrong"
 
@@ -129,7 +131,8 @@ def software():
                                    current_topic = current_topic,
                                    questions=questions,
                                    users=users,
-                                   topics = topics)
+                                   topics = topics,
+                                   current_topic_id=current_topic_id)
     else:
         return "Something going wrong"
 
@@ -147,7 +150,8 @@ def networking():
                                    current_topic = current_topic,
                                    questions=questions,
                                    users=users,
-                                   topics = topics)
+                                   topics = topics,
+                                   current_topic_id=current_topic_id)
     else:
         return "Something going wrong"
 
@@ -163,6 +167,7 @@ def telephony():
             users = Users.query.all()
             return render_template("template.html",
                                    current_topic = current_topic,
+                                   current_topic_id=current_topic_id,
                                    questions=questions,
                                    users=users,
                                    topics = topics)
@@ -183,7 +188,8 @@ def other():
                                    current_topic = current_topic,
                                    questions=questions,
                                    users=users,
-                                   topics = topics)
+                                   topics = topics,
+                                   current_topic_id=current_topic_id)
     else:
         return "Something going wrong"
 ##############################
@@ -194,10 +200,27 @@ def other():
 @app.route('/ask_question', methods=['GET','POST'])
 @login_required
 def ask_question():
-    if request.method == 'GET':
+    if 'current_topic_id' in request.values:
         topics = Topic.query.all()
+        current_topic_id=request.values['current_topic_id']
+        # print('111111111111111')
+        # print(current_topic_id)
+        # for topic in topics:
+        #     if topic.id == int(current_topic_id):
+        #         print('ok')
+        #     else:
+        #         print('not')
+        return render_template('ask_question.html',
+                               topics=topics,
+                               current_topic_id=current_topic_id)
+
+    else:
+        topics = Topic.query.all()
+        # current_topic_id=request.form['current_topic_id']
         return render_template('ask_question.html',
                                topics=topics)
+
+
 
 @app.route('/add_question', methods=['GET','POST'])
 @login_required
