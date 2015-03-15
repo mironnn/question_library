@@ -9,27 +9,61 @@
         <p><a class="btn btn-lg btn-success" href="/ask_question" role="button">Ask question</a></p>
       </div>
 
+
       <div class="row marketing">
         <div class="col-lg-6">
-          <a href="programming" style="text-decoration: none;"><h4>Programming</h4></a>
-          <p>You like to code and faced with issue: find answers here.</p>
 
-          <h4>Hardware</h4>
-          <p>Want to know details about upgrading your hardware: visit this topic.</p>
+          <div>
+              <form action="/programming" method="POST" name="topic_template">
+                <input name="topic_name" type="hidden" value="Programming" />
+                <button type="submit" style="text-decoration: none;" class="btn btn-link"><h4>Programming</h4></button>
+                <p style="padding-left: 12px;">You like to code and faced with issue: find answers here.</p>
+              </form>
+          </div>
 
-          <h4>Software</h4>
-          <p>Don't know how to fix problem with your software, just see answers here.</p>
+          <div>
+              <form action="/hardware" method="POST" name="topic_template">
+                <input name="topic_name" type="hidden" value="Hardware" />
+                <button type="submit" style="text-decoration: none;" class="btn btn-link"><h4>Hardware</h4></button>
+                <p style="padding-left: 12px;">Want to know details about upgrading your hardware: visit this topic.</p>
+              </form>
+          </div>
+
+          <div>
+              <form action="/software" method="POST" name="topic_template">
+                <input name="topic_name" type="hidden" value="Software" />
+                <button type="submit" style="text-decoration: none;" class="btn btn-link"><h4>Software</h4></button>
+                <p style="padding-left: 12px;">Don't know how to fix problem with your software, just see answers here.</p>
+              </form>
+          </div>
         </div>
 
         <div class="col-lg-6">
-          <h4>Networking</h4>
-          <p>Want to organize your networking: you can find answers here .</p>
 
-          <h4>Telephony</h4>
-          <p>Interested in telephony solutions, please find answers here.</p>
+          <div>
+              <form action="/networking" method="POST" name="topic_template">
+                <input name="topic_name" type="hidden" value="Networking" />
+                <button type="submit" style="text-decoration: none;" class="btn btn-link"><h4>Networking</h4></button>
+                <p style="padding-left: 12px;">Want to organize your networking: you can find answers here.</p>
+              </form>
+          </div>
 
-          <h4>Other</h4>
-          <p>Didn't see interested topic with answers, try to find them here</p>
+          <div>
+              <form action="/telephony" method="POST" name="topic_template">
+                <input name="topic_name" type="hidden" value="Telephony" />
+                <button type="submit" style="text-decoration: none;" class="btn btn-link"><h4>Telephony</h4></button>
+                <p style="padding-left: 12px;">Don't know how to fix problem with your software, just see answers here.</p>
+              </form>
+          </div>
+
+          <div>
+              <form action="/other" method="POST" name="topic_template">
+                <input name="topic_name" type="hidden" value="Other" />
+                <button type="submit" style="text-decoration: none;" class="btn btn-link"><h4>Other</h4></button>
+                <p style="padding-left: 12px;">Didn't see interested topic with answers, try to find them here.</p>
+              </form>
+          </div>
+
         </div>
       </div>
 

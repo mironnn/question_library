@@ -74,16 +74,102 @@ def contact():
 def about():
     return render_template ("about.html")
 
+#################################
+## Templates for question list ##
+#################################
 
-@app.route('/programming')
+@app.route('/programming', methods=['GET','POST'])
 def programming():
-    # topic = Topic.query.get(1)
-    questions = Question.query.filter_by(topic_id=1)
-    users = Users.query.all()
-    return render_template("programming.html",
-                            questions=questions,
-                            users=users)
-    # return "Hello"
+    if 'topic_name' in request.values:
+        if request.form['topic_name'] == 'Programming':
+            topics = Topic.query.all()
+            questions = Question.query.filter_by(topic_id=1)
+            users = Users.query.all()
+            return render_template("template.html",
+                                    questions=questions,
+                                    users=users,
+                                    topics = topics)
+    else:
+        return "Something going wrong"
+
+@app.route('/hardware', methods=['GET','POST'])
+def hardware():
+    if 'topic_name' in request.values:
+        if request.form['topic_name'] == 'Hardware':
+            current_topic = request.form['topic_name']
+            current_topic_id = Topic.query.filter_by(topic_name=current_topic).first()
+            current_topic_id=current_topic_id.id
+            topics = Topic.query.all()
+            # return (current_topic)
+            questions = Question.query.filter_by(topic_id=current_topic_id)
+            users = Users.query.all()
+            return render_template("template.html",
+                                   current_topic = current_topic,
+                                   questions=questions,
+                                   users=users,
+                                   topics = topics)
+    else:
+        return "Something going wrong"
+
+@app.route('/software', methods=['GET','POST'])
+def software():
+    if 'topic_name' in request.values:
+        if request.form['topic_name'] == 'Software':
+            topics = Topic.query.all()
+            questions = Question.query.filter_by(topic_id=1)
+            users = Users.query.all()
+            return render_template("template.html",
+                                    questions=questions,
+                                    users=users,
+                                    topics = topics)
+    else:
+        return "Something going wrong"
+
+@app.route('/networking', methods=['GET','POST'])
+def networking():
+    if 'topic_name' in request.values:
+        if request.form['topic_name'] == 'Networking':
+            topics = Topic.query.all()
+            questions = Question.query.filter_by(topic_id=1)
+            users = Users.query.all()
+            return render_template("template.html",
+                                    questions=questions,
+                                    users=users,
+                                    topics = topics)
+    else:
+        return "Something going wrong"
+
+@app.route('/telephony', methods=['GET','POST'])
+def telephony():
+    if 'topic_name' in request.values:
+        if request.form['topic_name'] == 'Telephony':
+            topics = Topic.query.all()
+            questions = Question.query.filter_by(topic_id=1)
+            users = Users.query.all()
+            return render_template("template.html",
+                                    questions=questions,
+                                    users=users,
+                                    topics = topics)
+    else:
+        return "Something going wrong"
+
+@app.route('/other', methods=['GET','POST'])
+def other():
+    if 'topic_name' in request.values:
+        if request.form['topic_name'] == 'Other':
+            topics = Topic.query.all()
+            questions = Question.query.filter_by(topic_id=1)
+            users = Users.query.all()
+            return render_template("template.html",
+                                    questions=questions,
+                                    users=users,
+                                    topics = topics)
+    else:
+        return "Something going wrong"
+#####################
+## Templates ended ##
+#####################
+
 
 @app.route('/ask_question', methods=['GET','POST'])
 @login_required

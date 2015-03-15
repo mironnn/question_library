@@ -8,9 +8,18 @@
 
            <div style="text-align: center; !important">
               <h3><b>QuestionZ</b> is very popular application among young technicians and developers!</h3>
-               <h3>Register now and become one of us!</h3>
+
                <br>
+
+               {% if g.user.is_authenticated() %}
+
+
+               {% else%}
+               <h3>Register now or log in and become one of us!</h3>
+               <a style="margin: 10px;" class="btn btn-default btn-lg" href="/login" role="button">Log in</a>
                <a class="btn btn-default btn-lg" href="/register" role="button">Register now</a>
+               {% endif%}
+
                <br>
                <br>
                <br>
