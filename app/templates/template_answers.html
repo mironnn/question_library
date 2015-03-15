@@ -5,46 +5,50 @@
 
 <div><h2>Answers for: </h2></div>
         <br>
-<span>Question is: {{current_question.question_body}}</span>
+<span>User <b>"{{current_user.username}}"</b> asked : "{{current_question.question_body}}?"</span>
 
          <div class="panel-body">
-              <form action="/votes" method="POST" name="answers_template">
-                  <ul class="list-group" style="border-collapse: collapse; !important">
-                      {% for answer in answers %}
-                        <li class="list-group-item" style="border-collapse: collapse; !important">
-                            <span>Answer is {{answer.answer_body}}</span>
-                            <input name="question_id" type="hidden" value="{{current_question.id}}" />
-                            <button type="submit" style="text-decoration: none;" class="btn btn-link">Vote</button>
-                        </li>
-                      {% endfor %}
-                  </ul>
-              </form>
-          </div>
+             <table class="table table-bordered">
+                 {% for answer in answers %}
+                 {% for user in users %}
+                 {% if answer.user_id == user.id%}
+                 <tr>
+                     <td>
+                         <form action="/votes" method="GET" name="answers_template">
+                             <input name="question_id" type="hidden" value="{{current_question.id}}" />
+                             <span>User <b>"{{user.username}}"</b> answered: "{{answer.answer_body}}."</span>
+                             <input name="answer_id" type="hidden" value="{{answer.id}}" />
+                             <button type="submit" style="text-decoration: none; float: right;" class="btn btn-link"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                             <span style="float: right;">Likes: {{answer.vote}}</span>
+                         </form>
+                     </td>
+                 </tr>
+                 {% endif %}
+                 {% endfor %}
+                 {% endfor %}
+
+             </table>
+
         <div>
             <form action="/add_answer" method="POST" name="add_answers">
                 <input name="question_id" type="hidden" value="{{current_question.id}}" />
 
-                <div class="form-group">
-                <div class="col-sm-10">
+                <div >
+                <div >
                     <div class="ddl">
                         <div class="input-group">
-                            <input style="width: 500px;" class="form-control ddl-text" name="answer" type="text" value=""  />
+                            <input style="width: 400px;" class="form-control ddl-text" name="answer" type="text" required value=""  />
+
+                            <button style="margin-left: 5px;" type="submit" class="btn btn-primary">Add answer</button>
+                            <a href="/index" style="margin-left: 5px;" class="btn btn-default">Cancel</a>
                         </div>
                     </div>
-                </div>
-             </div>
 
-
-
-                <div class="panel-footer">
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary">Add answer</button>
-                            <a href="/index" class="btn btn-default">Cancel</a>
-                        </div>
                     </div>
                 </div>
+
             </form>
+        </div>
         </div>
 
 {% endblock %}

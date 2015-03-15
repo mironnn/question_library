@@ -48,7 +48,7 @@ def login():
         return redirect(url_for('login'))
     login_user(registered_user, remember=remember_me)
     flash('Logged in successfully')
-    return redirect(request.args.get('next') or url_for('index'))
+    return redirect(url_for('index'))
 
 
 @app.route('/logout')
@@ -214,6 +214,12 @@ def add_question():
         db.session.add(new_question)
         db.session.commit()
         flash ('Question successfully added')
+
+        # if my_topic.topic_name == 'Programming':
+        #     return redirect(url_for('/programming'))
+        # elif my_topic.topic_name == 'Hardware':
+        #     return redirect(url_for('/hardware'))
+        # else:
         return redirect(url_for('index'))
 
 ##########################
@@ -222,64 +228,63 @@ def add_question():
 
 @app.route('/answers')
 def answers():
-    if 'question_id' in request.values:
-        # print("1111111111111111111111111111")
-        question_id=request.values['question_id']
-        # question = Question()
-        # question=request.form['form_question_id']
-        # question_id = question.id
-        # return question_id
-        answers = Answer.query.filter_by(question_id=question_id)
-        # answers = Answer.query.all()
-        current_question=Question.query.get(int(question_id))
-        return render_template('template_answers.html',
-                                   answers=answers,
-                                   current_question=current_question)
+    question_id=request.values['question_id']
+    answers = Answer.query.filter_by(question_id=question_id)
+    current_question=Question.query.get(int(question_id))
+    users = Users.query.all()
+    current_user = Users.query.get(int(current_question.user_id))
+    return render_template('template_answers.html',
+                           answers=answers,
+                           current_question=current_question,
+                           current_user=current_user,
+                           users=users)
+
 
 
 @app.route('/add_answer', methods=['GET','POST'])
 @login_required
 def add_answer():
     if 'answer' in request.values:
-        # topics = Topic.query.all()
-        question_id=request.form['question_id']
-        # current_question=Topic.query.get(topic_id)
-        new_answer = Answer()
-        new_answer.answer_body = request.form['answer']
-        new_answer.timestamp = datetime.utcnow()
-        new_answer.question_id = int(question_id)
-        new_answer.user_id = g.user.id
-        db.session.add(new_answer)
+        # if request.form['question_id'] != None:
+            # topics = Topic.query.all()
+            question_id=request.form['question_id']
+            # current_question=Topic.query.get(topic_id)
+            new_answer = Answer()
+            new_answer.answer_body = request.form['answer']
+            new_answer.timestamp = datetime.utcnow()
+            new_answer.question_id = int(question_id)
+            new_answer.user_id = g.user.id
+            db.session.add(new_answer)
+            db.session.commit()
+            flash ('Answer successfully added')
+
+            answers = Answer.query.filter_by(question_id=question_id)
+            current_question=Question.query.get(int(question_id))
+            current_user = Users.query.get(int(current_question.user_id))
+            users = Users.query.all()
+            return render_template('template_answers.html',
+                                   answers=answers,
+                                   current_question=current_question,
+                                   current_user=current_user,
+                                   users=users)
+
+
+@app.route('/votes')
+@login_required
+def votes():
+    if 'answer_id' in request.values:
+
+        question_id=request.values['question_id']
+        answers = Answer.query.filter_by(question_id=question_id)
+        current_question=Question.query.get(int(question_id))
+        users = Users.query.all()
+
+        answer_id=request.values['answer_id']
+        current_answer=Answer.query.get(int(answer_id))
+        current_answer.vote+=1
+        db.session.add(current_answer)
         db.session.commit()
-        flash ('Answer successfully added')
-        return redirect(url_for('index'))
-
-
-
-
-
-#
-#     if 'topic_name' in request.values:
-#         if request.form['topic_name'] == 'Other':
-#             current_topic = request.form['topic_name']
-#             current_topic_id = Topic.query.filter_by(topic_name=current_topic).first()
-#             current_topic_id=current_topic_id.id
-#             topics = Topic.query.all()
-#             questions = Question.query.filter_by(topic_id=current_topic_id)
-#             users = Users.query.all()
-#             return render_template("template.html",
-#                                    current_topic = current_topic,
-#                                    questions=questions,
-#                                    users=users,
-#                                    topics = topics)
-#     else:
-#         return "Something going wrong"
-#
-#
-# @app.route('/ask_question', methods=['GET','POST'])
-# @login_required
-# def ask_question():
-#     if request.method == 'GET':
-#         topics = Topic.query.all()
-#         return render_template('ask_question.html',
-#                                topics=topics)
+    return render_template('template_answers.html',
+                           answers=answers,
+                           current_question=current_question,
+                           users=users)

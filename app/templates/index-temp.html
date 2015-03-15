@@ -1,14 +1,16 @@
+         <div>
 
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>{{title}} - questions</title>
-</head>
-<body>
-    <h1> Hello, {{user.nickname}}</h1>
+              <form action="/answers" method="get" name="template">
+                  <ul class="list-group" style="border-collapse: collapse; !important">
+                      {% for question in questions %}
+                        <li class="list-group-item" style="border-collapse: collapse; !important">
+                            <input name="question_id" type="hidden" value="{{question.id}}" />
+                            <button type="submit" style="text-decoration: none;" class="btn btn-link">{{question.question_body}}</button>
+                            <span>{{question.id}}</span>
+                        </li>
+                      {% endfor %}
+                  </ul>
 
-<a class="btn btn-default" href="#" role="button">Link</a>
-<button class="btn btn-default" type="submit">Button</button>
-</body>
-</html>
+              </form>
+
+          </div>

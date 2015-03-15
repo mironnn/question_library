@@ -6,20 +6,26 @@
 <div><h2>{{current_topic}} questions: </h2></div>
         <br>
 
+         <div class="row marketing">
+             <table class="table table-bordered">
 
-         <div>
-              <form action="/answers" method="get" name="template">
-                  <ul class="list-group" style="border-collapse: collapse; !important">
-                      {% for question in questions %}
-                        <li class="list-group-item" style="border-collapse: collapse; !important">
-                            <input name="question_id" type="hidden" value="{{question.id}}" />
-                            <button type="submit" style="text-decoration: none;" class="btn btn-link">{{question.question_body}}</button>
-                            <span>{{question.id}}</span>
-                        </li>
-                      {% endfor %}
-                  </ul>
-              </form>
+                 {% for question in questions %}
+                 {% for user in users %}
+                 {% if question.user_id == user.id%}
+                 <tr>
+                     <td>
+                         <form action="/answers" method="get" name="template">
+                             <input name="question_id" type="hidden" value="{{question.id}}" />
+                             <button type="submit" style="text-decoration: none;" class="btn btn-link">{{question.question_body}}?</button>
+                             <span style="float: right;">Asked User: <b>"{{user.username}}"</b></span>
+                             <!--<span>{{question.id}}</span>-->
+                         </form>
+                     </td>
+                 </tr>
+                 {% endif %}
+                 {% endfor %}
+                 {% endfor %}
+             </table>
           </div>
-
 
 {% endblock %}
