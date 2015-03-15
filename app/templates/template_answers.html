@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<div><h2>{{current_topic}} questions: </h2></div>
+<div><h2>Answers for: </h2></div>
         <br>
-
+<span>123</span>
 
          <div>
-              <form action="/answers" method="POST" name="template">
+              <form action="/answers" method="POST" name="answers_template">
                   <ul class="list-group" style="border-collapse: collapse; !important">
                       {% for question in questions %}
                         <li class="list-group-item" style="border-collapse: collapse; !important">

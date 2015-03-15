@@ -82,13 +82,17 @@ def about():
 def programming():
     if 'topic_name' in request.values:
         if request.form['topic_name'] == 'Programming':
+            current_topic = request.form['topic_name']
+            current_topic_id = Topic.query.filter_by(topic_name=current_topic).first()
+            current_topic_id=current_topic_id.id
             topics = Topic.query.all()
-            questions = Question.query.filter_by(topic_id=1)
+            questions = Question.query.filter_by(topic_id=current_topic_id)
             users = Users.query.all()
             return render_template("template.html",
-                                    questions=questions,
-                                    users=users,
-                                    topics = topics)
+                                   current_topic = current_topic,
+                                   questions=questions,
+                                   users=users,
+                                   topics = topics)
     else:
         return "Something going wrong"
 
@@ -115,13 +119,17 @@ def hardware():
 def software():
     if 'topic_name' in request.values:
         if request.form['topic_name'] == 'Software':
+            current_topic = request.form['topic_name']
+            current_topic_id = Topic.query.filter_by(topic_name=current_topic).first()
+            current_topic_id=current_topic_id.id
             topics = Topic.query.all()
-            questions = Question.query.filter_by(topic_id=1)
+            questions = Question.query.filter_by(topic_id=current_topic_id)
             users = Users.query.all()
             return render_template("template.html",
-                                    questions=questions,
-                                    users=users,
-                                    topics = topics)
+                                   current_topic = current_topic,
+                                   questions=questions,
+                                   users=users,
+                                   topics = topics)
     else:
         return "Something going wrong"
 
@@ -129,13 +137,17 @@ def software():
 def networking():
     if 'topic_name' in request.values:
         if request.form['topic_name'] == 'Networking':
+            current_topic = request.form['topic_name']
+            current_topic_id = Topic.query.filter_by(topic_name=current_topic).first()
+            current_topic_id=current_topic_id.id
             topics = Topic.query.all()
-            questions = Question.query.filter_by(topic_id=1)
+            questions = Question.query.filter_by(topic_id=current_topic_id)
             users = Users.query.all()
             return render_template("template.html",
-                                    questions=questions,
-                                    users=users,
-                                    topics = topics)
+                                   current_topic = current_topic,
+                                   questions=questions,
+                                   users=users,
+                                   topics = topics)
     else:
         return "Something going wrong"
 
@@ -143,13 +155,17 @@ def networking():
 def telephony():
     if 'topic_name' in request.values:
         if request.form['topic_name'] == 'Telephony':
+            current_topic = request.form['topic_name']
+            current_topic_id = Topic.query.filter_by(topic_name=current_topic).first()
+            current_topic_id=current_topic_id.id
             topics = Topic.query.all()
-            questions = Question.query.filter_by(topic_id=1)
+            questions = Question.query.filter_by(topic_id=current_topic_id)
             users = Users.query.all()
             return render_template("template.html",
-                                    questions=questions,
-                                    users=users,
-                                    topics = topics)
+                                   current_topic = current_topic,
+                                   questions=questions,
+                                   users=users,
+                                   topics = topics)
     else:
         return "Something going wrong"
 
@@ -157,18 +173,22 @@ def telephony():
 def other():
     if 'topic_name' in request.values:
         if request.form['topic_name'] == 'Other':
+            current_topic = request.form['topic_name']
+            current_topic_id = Topic.query.filter_by(topic_name=current_topic).first()
+            current_topic_id=current_topic_id.id
             topics = Topic.query.all()
-            questions = Question.query.filter_by(topic_id=1)
+            questions = Question.query.filter_by(topic_id=current_topic_id)
             users = Users.query.all()
             return render_template("template.html",
-                                    questions=questions,
-                                    users=users,
-                                    topics = topics)
+                                   current_topic = current_topic,
+                                   questions=questions,
+                                   users=users,
+                                   topics = topics)
     else:
         return "Something going wrong"
-#####################
-## Templates ended ##
-#####################
+##############################
+## Question Templates ended ##
+##############################
 
 
 @app.route('/ask_question', methods=['GET','POST'])
@@ -196,4 +216,24 @@ def add_question():
         flash ('Question successfully added')
         return redirect(url_for('index'))
 
-# @app.route('programming_question/'):
+###################################
+## Template for question answers ##
+###################################
+
+@app.route('/answers', methods=['GET','POST'])
+def answers():
+    if 'topic_name' in request.values:
+        if request.form['topic_name'] == 'Other':
+            current_topic = request.form['topic_name']
+            current_topic_id = Topic.query.filter_by(topic_name=current_topic).first()
+            current_topic_id=current_topic_id.id
+            topics = Topic.query.all()
+            questions = Question.query.filter_by(topic_id=current_topic_id)
+            users = Users.query.all()
+            return render_template("template.html",
+                                   current_topic = current_topic,
+                                   questions=questions,
+                                   users=users,
+                                   topics = topics)
+    else:
+        return "Something going wrong"
